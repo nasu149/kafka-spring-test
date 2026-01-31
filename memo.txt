@@ -38,14 +38,22 @@ podman exec -it kafka /opt/kafka/bin/kafka-topics.sh \
 
 podman exec -it kafka /opt/kafka/bin/kafka-topics.sh \
   --bootstrap-server localhost:9092 \
-  --create --topic alerts --partitions 1 --replication-factor 1
+  --create --topic my-topic --partitions 15 --replication-factor 1
 
-# コンテナ名を "kafka" と仮定
 podman exec -it kafka /opt/kafka/bin/kafka-topics.sh \
   --bootstrap-server localhost:9092 \
   --alter \
   --topic my-topic \
   --partitions 5
+
+podman exec -it kafka /opt/kafka/bin/kafka-topics.sh \
+  --bootstrap-server localhost:9092 \
+  --delete --topic my-topic
+
+
+podman exec -it kafka /opt/kafka/bin/kafka-consumer-groups.sh \
+  --bootstrap-server localhost:9092 \
+  --describe --group my-consumer-group
 
 podman exec -it kafka /opt/kafka/bin/kafka-console-producer.sh \
   --bootstrap-server localhost:9092 \
