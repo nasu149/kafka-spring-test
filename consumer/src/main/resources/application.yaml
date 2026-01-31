@@ -1,0 +1,8 @@
+spring:
+  kafka:
+    bootstrap-servers: localhost:9092  # Brokerの接続先
+    consumer:
+      group-id: my-consumer-group      # コンシューマーグループID
+      auto-offset-reset: earliest      # 以前のメッセージから読み取る設定
+      key-deserializer: org.apache.kafka.common.serialization.StringDeserializer
+      value-deserializer: org.apache.kafka.common.serialization.StringDeserializer
